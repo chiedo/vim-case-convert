@@ -1,4 +1,4 @@
-**Vim-case-fixer**  -  Update the case of your variables.
+**Vim-case-convert**  -  Update the case of your variables.
 ==================================
 Makes switching between camel case, snake case and hyphenated variables quick. Great for conforming legacy code bases or code written by a developer who ignored the standards to the desired case.
 
@@ -6,7 +6,7 @@ Installation
 ------------------------
 ### Pathogen Install
 1. Navigate to your **[VIM_ROOT]/bundle** directory in your local Vim setup
-2. git clone https://github.com/chiedojohn/vim-case-fixer.git
+2. git clone https://github.com/chiedojohn/vim-case-convert.git
 
 
 Usage
