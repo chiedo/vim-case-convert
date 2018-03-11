@@ -22,7 +22,18 @@ To convert the case, select a block of text in visual mode and the enter one of 
 :SnakeToHyphen
 ```
 
-To convert all occerences in your document then run one of the following commands:
+These commands switch the case in ALL lines spanned by the visual selection, also outside it. To limit conversion to visual selection contents use the following:
+
+```
+:CamelToHyphenSel
+:CamelToSnakeSel
+:HyphenToCamelSel
+:HyphenToSnakeSel
+:SnakeToCamelSel
+:SnakeToHyphenSel
+```
+
+To convert all occurences in your document then run one of the following commands:
 
 ```
 :CamelToHyphenAll
