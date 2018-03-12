@@ -6,7 +6,7 @@
 "   be promted at each change.
 " - start_line: The first line to search.
 " - end_line: The last line to search
-function! CaseConvertFunc(conversion, skip_confirmation, start_line, end_line)
+function! CaseConvertFunc(conversion, skip_confirmation, start_line, end_line, selection_only)
 
   " If the skip confirmation value is set to 1, then don't prompt the user at
   " each change.
@@ -14,6 +14,12 @@ function! CaseConvertFunc(conversion, skip_confirmation, start_line, end_line)
     let modifiers= "ge"
   else
     let modifiers= "gec"
+  endif
+
+  if a:selection_only
+    let selection_mod = '\%V'
+  else
+    let selection_mod = ''
   endif
 
   " Self explanitory
@@ -38,17 +44,24 @@ function! CaseConvertFunc(conversion, skip_confirmation, start_line, end_line)
   endif
   
   " Execute the command
-  exe a:start_line . "," . a:end_line ."s#". search_for . "#" . replace_with . "#" . modifiers
+  exe a:start_line . "," . a:end_line . "s#" . selection_mod . search_for . "#" . replace_with . "#" . modifiers
   
 endfunction
 
 "Available commands
-command! -range -bang CamelToHyphen call CaseConvertFunc("CamelToHyphen",<bang>0,<line1>,<line2>)
-command! -range -bang CamelToSnake call CaseConvertFunc("CamelToSnake",<bang>0,<line1>,<line2>)
-command! -range -bang HyphenToCamel call CaseConvertFunc("HyphenToCamel",<bang>0,<line1>,<line2>)
-command! -range -bang HyphenToSnake call CaseConvertFunc("HyphenToSnake",<bang>0,<line1>,<line2>)
-command! -range -bang SnakeToCamel call CaseConvertFunc("SnakeToCamel",<bang>0,<line1>,<line2>)
-command! -range -bang SnakeToHyphen call CaseConvertFunc("SnakeToHyphen",<bang>0,<line1>,<line2>)
+command! -range -bang CamelToHyphen call CaseConvertFunc("CamelToHyphen",<bang>0,<line1>,<line2>,0)
+command! -range -bang CamelToSnake call CaseConvertFunc("CamelToSnake",<bang>0,<line1>,<line2>,0)
+command! -range -bang HyphenToCamel call CaseConvertFunc("HyphenToCamel",<bang>0,<line1>,<line2>,0)
+command! -range -bang HyphenToSnake call CaseConvertFunc("HyphenToSnake",<bang>0,<line1>,<line2>,0)
+command! -range -bang SnakeToCamel call CaseConvertFunc("SnakeToCamel",<bang>0,<line1>,<line2>,0)
+command! -range -bang SnakeToHyphen call CaseConvertFunc("SnakeToHyphen",<bang>0,<line1>,<line2>,0)
+
+command! -range -bang CamelToHyphenSel call CaseConvertFunc("CamelToHyphen",<bang>0,<line1>,<line2>,1)
+command! -range -bang CamelToSnakeSel call CaseConvertFunc("CamelToSnake",<bang>0,<line1>,<line2>,1)
+command! -range -bang HyphenToCamelSel call CaseConvertFunc("HyphenToCamel",<bang>0,<line1>,<line2>,1)
+command! -range -bang HyphenToSnakeSel call CaseConvertFunc("HyphenToSnake",<bang>0,<line1>,<line2>,1)
+command! -range -bang SnakeToCamelSel call CaseConvertFunc("SnakeToCamel",<bang>0,<line1>,<line2>,1)
+command! -range -bang SnakeToHyphenSel call CaseConvertFunc("SnakeToHyphen",<bang>0,<line1>,<line2>,1)
 
 command! -range=% -bang CamelToHyphenAll call CaseConvertFunc("CamelToHyphen", <bang>0,<line1>,<line2>)
 command! -range=% -bang CamelToSnakeAll call CaseConvertFunc("CamelToSnake", <bang>0,<line1>,<line2>)
